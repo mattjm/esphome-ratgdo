@@ -152,18 +152,28 @@ binary_sensor:
           then:
             - lambda: !lambda |-
               id(global_dry_contact_open) = true;
+              ESP_LOGD("dry contact open", "set open global var true");
+              auto time = id(sntp_time).now();
+                ESP_LOGD("timestamp", "%d", time.timestamp);
             - delay: 15ms
             - lambda: !lambda |-
               if (id(global_dry_contact_close)) {
                 id($id_prefix).door_toggle();
+                ESP_LOGD("dry contact open", "reached toggle code");
+                auto time = id(sntp_time).now();
+                ESP_LOGD("timestamp", "%d", time.timestamp);
               } else {
                 auto call = id(${id_prefix}_garage_door).make_call();
                 call.set_command_open();
                 call.perform();
+                ESP_LOGD("dry contact open", "reached singular open code");
               }
             - delay: 45ms
             - lambda: !lambda |-
-              id(global_dry_contact_open) = false;            
+              id(global_dry_contact_open) = false;   
+              ESP_LOGD("dry contact open", "set open global var false");    
+              auto time = id(sntp_time).now();
+              ESP_LOGD("timestamp", "%d", time.timestamp);     
   - platform: gpio
     id: "${id_prefix}_dry_contact_close"
     pin:
@@ -183,14 +193,21 @@ binary_sensor:
           then:
             - lambda: !lambda |-
                 id(global_dry_contact_close) = true;
+                ESP_LOGD("dry contact close", "set close global var true");
+                auto time = id(sntp_time).now();
+                ESP_LOGD("timestamp", "%d", time.timestamp);
             - delay: 30ms
             - lambda: !lambda |-
                 if (!id(global_dry_contact_open).state) {
+                  ESP_LOGD("dry contact close", "reached singular close code");
+                  auto time = id(sntp_time).now();
+                  ESP_LOGD("timestamp", "%d", time.timestamp);
                   auto call = id(${id_prefix}_garage_door).make_call();
                   call.set_command_close();
                   call.perform();
                 }
                 id(global_dry_contact_close) = false;
+                ESP_LOGD("dry contact close", "set close global var false");
   - platform: gpio
     id: "${id_prefix}_dry_contact_light"
     pin:
