@@ -12,6 +12,7 @@ preferences:
 text_sensor:
   - platform: version
     name: "Firmware Version"
+    id: mattsversion
 
 ratgdo:
   id: ${id_prefix}
@@ -164,6 +165,7 @@ binary_sensor:
     filters:
       - delayed_on_off: 500ms
     on_press:
+      - logger.log: "dry contact close pressed"
       - if:
           condition:
             binary_sensor.is_off: ${id_prefix}_dry_contact_open
@@ -189,6 +191,7 @@ binary_sensor:
     filters:
       - delayed_on_off: 500ms
     on_press:
+      - logger.log: "light toggle pressed"
       - light.toggle: ${id_prefix}_light
 
 number:
