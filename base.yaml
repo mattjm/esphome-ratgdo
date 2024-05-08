@@ -143,6 +143,13 @@ binary_sensor:
             binary_sensor.is_off: ${id_prefix}_dry_contact_close
           then:
             - cover.open: ${id_prefix}_garage_door
+            - logger.log: "opening door from single contact trigger"
+      - if:
+          condition:
+            binary_sensor.is_on: ${id_prefix}_dry_contact_close
+          then:
+            - cover.toggle: ${id_prefix}_garage_door
+            - logger.log: "toggling door from both contacts triggering"
   - platform: gpio
     id: "${id_prefix}_dry_contact_close"
     pin:
@@ -161,6 +168,13 @@ binary_sensor:
             binary_sensor.is_off: ${id_prefix}_dry_contact_open
           then:
             - cover.close: ${id_prefix}_garage_door
+            - logger.log: "closing door from single contact trigger"
+      - if:
+          condition:
+            binary_sensor.is_on: ${id_prefix}_dry_contact_open
+          then:
+            - cover.toggle: ${id_prefix}_garage_door
+            - logger.log: "toggling door from both contacts triggering"
   - platform: gpio
     id: "${id_prefix}_dry_contact_light"
     pin:
