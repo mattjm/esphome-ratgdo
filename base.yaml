@@ -138,6 +138,7 @@ binary_sensor:
     filters:
       - delayed_on_off: 500ms
     on_press:
+      - logger.log: "dry contact open pressed"
       - if:
           condition:
             binary_sensor.is_off: ${id_prefix}_dry_contact_close
