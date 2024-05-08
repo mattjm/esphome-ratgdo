@@ -26,11 +26,12 @@ esp8266:
   restore_from_flash: true
 
 dashboard_import:
-  package_import_url: github://ratgdo/mattjm/v25iboard.yaml@main
+  package_import_url: github://mattjm/esphome-ratgdo/v25iboard.yaml@toggleonopenclose
 
 packages:
   remote_package:
     url: https://github.com/mattjm/esphome-ratgdo
+    ref: toggleonopenclose
     files: [base.yaml]
     refresh: 1s
 
