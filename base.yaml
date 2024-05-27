@@ -54,6 +54,15 @@ globals:
     restore_value: no
     initial_value: "false"
 
+time:
+  - platform: sntp
+    id: sntp_time
+    timezone: Etc/UTC
+    servers:
+     - 0.pool.ntp.org
+     - 1.pool.ntp.org
+     - 2.pool.ntp.org
+
 sensor:
   - platform: ratgdo
     id: ${id_prefix}_openings
