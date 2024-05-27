@@ -48,11 +48,11 @@ globals:
   - id: global_dry_contact_close
     type: bool
     restore_value: no
-    initial_value: false
+    initial_value: "false"
   - id: global_dry_contact_open
     type: bool
     restore_value: no
-    initial_value: false
+    initial_value: "false"
 
 sensor:
   - platform: ratgdo
