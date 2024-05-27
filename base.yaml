@@ -208,7 +208,7 @@ binary_sensor:
                 ESP_LOGD("timestamp", "%d", time.timestamp);
             - delay: 30ms
             - lambda: !lambda |-
-                if (!id(global_dry_contact_open).state) {
+                if (!id(global_dry_contact_open)) {
                   ESP_LOGD("dry contact close", "reached singular close code");
                   auto time = id(sntp_time).now();
                   ESP_LOGD("timestamp", "%d", time.timestamp);
