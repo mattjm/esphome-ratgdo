@@ -53,6 +53,7 @@ globals:
      type: bool
      restore_value: no
      initial_value: false
+
 sensor:
   - platform: ratgdo
     id: ${id_prefix}_openings
