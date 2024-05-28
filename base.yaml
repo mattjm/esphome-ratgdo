@@ -137,9 +137,11 @@ binary_sensor:
     name: "Dry contact open"
     entity_category: diagnostic
     filters:
-      - delayed_on_off: 500ms
+      - delayed_on: 50ms
+      - delayed_off: 500ms
     on_press:
       - logger.log: "dry contact open pressed"
+      - delay: 50ms
       - if:
           condition:
             binary_sensor.is_off: ${id_prefix}_dry_contact_close
@@ -163,9 +165,11 @@ binary_sensor:
     name: "Dry contact close"
     entity_category: diagnostic
     filters:
-      - delayed_on_off: 500ms
+      - delayed_on: 50ms
+      - delayed_off: 500ms
     on_press:
       - logger.log: "dry contact close pressed"
+      - delay: 50ms
       - if:
           condition:
             binary_sensor.is_off: ${id_prefix}_dry_contact_open
