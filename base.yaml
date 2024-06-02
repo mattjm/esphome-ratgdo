@@ -183,7 +183,6 @@ binary_sensor:
     filters:
       - delayed_on_off: 500ms
     on_press:
-      - logger.log: "light toggle pressed"
       - light.toggle: ${id_prefix}_light
 
 number:
